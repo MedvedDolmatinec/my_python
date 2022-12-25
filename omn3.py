@@ -32,16 +32,11 @@ if __name__ == "__main__":
     action(n, x, x_noisy, 3)
     action(n, x, x_noisy, 9)
 
-    Ntest = 20
+    Ntest = 100
     n = np.arange(Ntest)
     std_deviation = 0.3
     xtest = np.random.random_sample(Ntest)
     ytest = np.sin(2*np.pi*xtest) + np.random.randn(Ntest) * std_deviation
-
-    plt.title("Тестовий набір даних")
-    plt.plot(n, xtest, 'b')
-    plt.plot(n, ytest, 'r')
-    plt.show()
 
     action(n, xtest, ytest, 0)
     action(n, xtest, ytest, 1)
