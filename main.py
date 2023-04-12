@@ -1,1 +1,1 @@
-"""My projects"""
+"""Machine learning and data analysis"""
