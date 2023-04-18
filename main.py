@@ -1,4 +1,5 @@
-"""Machine learning and data analysis pr1"""
+"""Classification using SVM"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
@@ -8,11 +9,21 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 
 
+"""
+Convert the data set to points on the map and mark them with shapes.
+"""
+
+
 def plot_dataset(X, y, axes):
     plt.plot(X[:, 0][y == 0], X[:, 1][y == 0], "ms")
     plt.plot(X[:, 0][y == 1], X[:, 1][y == 1], "g^")
     plt.axis(axes)
     plt.grid(True)
+
+
+"""
+adjustment, predictions for each instance of the test, contour
+"""
 
 
 def plot_predictions(clf, axes):
@@ -27,10 +38,12 @@ def plot_predictions(clf, axes):
 
 
 if __name__ == "__main__":
+    """creating dataset"""
+
     X, y = make_moons(n_samples=100, noise=0.2, random_state=100)
     axes = [-1.75, 2.5, -1.25, 1.75]
 
-#                                                       __linear__
+    """Use a linear kernel for SVM and show the resulting graphs"""
 
     model = SVC(kernel="linear", C=1000)
     model.fit(X, y)
@@ -53,7 +66,7 @@ if __name__ == "__main__":
 
     plt.show()
 
-#                                                       __Poly__
+    """Use the polynomial kernel for SVM and show the resulting graphs"""
 
     polynomial_svm_clf = make_pipeline(
         PolynomialFeatures(degree=3),
@@ -68,7 +81,7 @@ if __name__ == "__main__":
 
     plt.show()
 
-#                                                       __rbf__
+    """Use the RBF kernel for SVM and show the resulting graphs"""
 
     rbf_kernel_svm_clf = make_pipeline(
         StandardScaler(),
@@ -82,4 +95,3 @@ if __name__ == "__main__":
     plt.title("rbf")
 
     plt.show()
-
