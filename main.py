@@ -1,7 +1,16 @@
+"""Classification using decision trees"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
 from sklearn.tree import DecisionTreeClassifier
+
+
+"""
+    Convert the given data set to points 
+    on the map and mark them with shapes.
+    Also set contours and labels
+"""
 
 
 def plot_decision_boundary(clf, X, y, axes, cmap):
@@ -22,18 +31,27 @@ def plot_decision_boundary(clf, X, y, axes, cmap):
     plt.ylabel(r"$x_2$", rotation=0)
 
 
+"""
+Train the models. Display models on screen, one without restrictions, the other with
+"""
+
+
 def Model(X, y, model):
     model.fit(X, y)
     fig, axes = plt.subplots(ncols=2, figsize=(10, 4), sharey=True)
     plt.sca(axes[0])
-    plot_decision_boundary(model, X, y,
-                           axes=[-1.5, 2.4, -1, 1.5], cmap="Wistia")
+    plot_decision_boundary(model, X, y, axes=[-1.5, 2.4, -1, 1.5], cmap="Wistia")
     plt.title("No restrictions")
     plt.sca(axes[1])
     plot_decision_boundary(model, X, y, axes=[-1.5, 2.4, -1, 1.5], cmap="Wistia")
     plt.title(f"min_samples_leaf = {model.min_samples_leaf}")
     plt.ylabel("")
     plt.show()
+
+
+"""
+Creating models based on DecisionTreeClassifier using a dataset
+"""
 
 
 if __name__ == "__main__":
