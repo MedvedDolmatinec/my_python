@@ -1,4 +1,5 @@
 """Regression analysis based on SVM"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.pipeline import make_pipeline
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
     """Show the resulting scattergram"""
 
-    fig, axes = plt.subplots(ncols=2, figsize=(9, 4), sharey=True)
+    fig, axes = plt.subplots(ncols=2, figsize=(9, 4), sharey='all')
 
     plt.sca(axes[0])
     plot_svm_regression(svm_linear_reg, X, y, [-1.5, 1.5, -0.4, 1])
