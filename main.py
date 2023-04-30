@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import LinearSVR, SVR
+from sklearn.metrics import r2_score, mean_squared_error
 import matplotlib
 matplotlib.use('TkAgg')
 
@@ -45,18 +46,19 @@ if __name__ == "__main__":
 
     """Use a linear kernel for SVM"""
 
-    svm_linear_reg = make_pipeline(StandardScaler(),
-                                   LinearSVR(C=3, epsilon=0.3, random_state=100))
-
+    svm_linear_reg = make_pipeline(StandardScaler(), LinearSVR(C=3, epsilon=0.3, random_state=100))
     svm_linear_reg.fit(X, y)
+
+    print("\nSVR Train RMSE(linear): %.2f" % np.sqrt(mean_squared_error(y, svm_linear_reg.predict(X))),
+          "\nSVR Train R^2 Score: %.2f" % r2_score(y, svm_linear_reg.predict(X)))
 
     """Use polynomial kernel for SVM"""
 
-    svm_poly_reg = make_pipeline(StandardScaler(),
-                                 SVR(kernel="poly", degree=2,
-                                     C=1, epsilon=0.2))
-
+    svm_poly_reg = make_pipeline(StandardScaler(), SVR(kernel="poly", degree=2, C=1, epsilon=0.2))
     svm_poly_reg.fit(X, y)
+
+    print("\nSVR Train RMSE(polynomial): %.2f" % np.sqrt(mean_squared_error(y, svm_poly_reg.predict(X))),
+          "\nSVR Train R^2 Score: %.2f" % r2_score(y, svm_poly_reg.predict(X)))
 
     """Show the resulting scattergram"""
 
@@ -82,8 +84,14 @@ if __name__ == "__main__":
     svm_rbf_reg = make_pipeline(StandardScaler(), SVR(kernel="rbf", C=1, gamma=0.1, epsilon=0.2))
     svm_rbf_reg.fit(X, y)
 
+    print("\nSVR Train RMSE(rbf): %.2f" % np.sqrt(mean_squared_error(y, svm_rbf_reg.predict(X))),
+          "\nSVR Train R^2 Score: %.2f" % r2_score(y, svm_rbf_reg.predict(X)))
+
     svm_sigmoid_reg = make_pipeline(StandardScaler(), SVR(kernel="sigmoid", coef0=0, C=3, gamma=0.2, epsilon=0.3))
     svm_sigmoid_reg.fit(X, y)
+
+    print("\nSVR Train RMSE(sigmoid): %.2f" % np.sqrt(mean_squared_error(y, svm_sigmoid_reg.predict(X))),
+          "\nSVR Train R^2 Score: %.2f" % r2_score(y, svm_sigmoid_reg.predict(X)))
 
     fig2, axes = plt.subplots(ncols=2, figsize=(9, 4), sharey='all')
 
